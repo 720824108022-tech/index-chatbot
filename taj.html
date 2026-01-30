@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heritage Chatbot</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; }
+        .chatbox { width: 450px; margin: 50px auto; background: white; padding: 15px; border-radius: 10px; }
+        .messages { height: 350px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; }
+        .user { text-align: right; color: blue; margin: 5px 0; }
+        .bot { text-align: left; color: green; margin: 5px 0; }
+        input { width: 75%; padding: 8px; }
+        button { padding: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="chatbox">
+    <h3>🏛️ Heritage Chatbot</h3>
+    <p>Ask about Taj Mahal or the Big Temple</p>
+    <div class="messages" id="chat"></div>
+    <input id="userInput" placeholder="Type your question here..." />
+    <button onclick="send()">Send</button>
+</div>
+
+<script>
+function send() {
+    let input = document.getElementById("userInput");
+    let msg = input.value.toLowerCase();
+    let chat = document.getElementById("chat");
+
+    if(msg === "") return;
+
+    chat.innerHTML += `<div class="user">You: ${msg}</div>`;
+
+    let reply = "Sorry, I only provide information about Taj Mahal and Big Temple.";
+
+    if(msg.includes("taj")) {
+        reply = "🏰 Taj Mahal\nLocation: Agra, Uttar Pradesh, India\nHistory: Built by Mughal Emperor Shah Jahan in 1632 in memory of his wife Mumtaz Mahal. It is famous for its white marble architecture and is a UNESCO World Heritage Site.";
+    } 
+    else if(msg.includes("big temple") || msg.includes("venkateswara") || msg.includes("tirupati")) {
+        reply = "🛕 Tirupati Venkateswara Temple (Big Temple)\nLocation: Tirupati, Andhra Pradesh, India\nHistory: One of the most famous Hindu temples, dedicated to Lord Venkateswara (a form of Vishnu). Built over centuries, it attracts millions of devotees annually.";
+    }
+
+    chat.innerHTML += `<div class="bot">Bot: ${reply}</div>`;
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
